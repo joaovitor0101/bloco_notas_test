@@ -70,8 +70,30 @@ class _BlocoNotasState extends State<BlocoNotas> {
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
+                      trailing: IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                actions: [
+                                  TextButton(onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("Cancelar")
+                                  ),
+                                  TextButton(onPressed: () {
+                                    removerNota(index);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("Confirmar")
+                                  ),
+                                ],
+                              );
+                            }
+                          );
+                        }, icon: Icon(Icons.delete)),
                       title: Text(_notas[index]),
-                      onTap: () => removerNota(index),
                     ),
                   );
                 },
